@@ -1,0 +1,26 @@
+<ion-header class="kanit">
+  <ion-navbar color="darkblue">
+    <img alt="logo" height="40" src="../../assets/imgs/logo.png">
+    <!-- <ion-title>Home-เฝ้าระวัง</ion-title> -->
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="kanit">
+  <div class="map" id="map"></div>
+  <!-- <ion-card id="map" class="map"></ion-card> -->
+
+  <!-- List of Text Items -->
+
+  <div padding>
+    <h4>พบ {{dengueSum}} หมู่บ้านที่มีผู้ป่วยในรัศมี 1 กิโลเมตร</h4>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let d of dengueLst; let a = index">
+      <h2>หมู่บ้าน {{ d.properties.vill_nam_t}} </h2>
+      <p>ต.{{d.properties.tam_nam_t}} อ.{{d.properties.amp_nam_t}} จ.{{d.properties.prov_nam_t}}</p>
+      <h3>จำนวน {{d.properties.vill_den_3}} ราย</h3>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>

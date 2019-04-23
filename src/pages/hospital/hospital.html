@@ -1,0 +1,39 @@
+<ion-header class="kanit">
+  <ion-navbar color="darkblue">
+    <img alt="logo" height="40" src="../../assets/imgs/logo.png">
+    <!-- <ion-title>Hospital-ค้นหาโรงพยาบาล</ion-title> -->
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="kanit">
+  <div class="map" id="map3"></div>
+
+  <ion-item>
+    <ion-label>เลือกระยะห่าง</ion-label>
+    <ion-select [(ngModel)]="radius" interface="popover" (ionChange)="selectDistance($event)">
+      <ion-option value="10000">10 กม.</ion-option>
+      <ion-option value="30000">30 กม.</ion-option>
+      <ion-option value="60000">60 กม.</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-list>
+    <div padding>
+      <h4>พบ {{hospitalSum}} โรงพยาบาลในรัศมี 1 กิโลเมตร</h4>
+    </div>
+    <ion-item *ngFor="let h of hospitalLst; let a = index">
+      <h2>{{h.properties.name}}</h2>
+      <button ion-button clear item-end (click)="selectHospital(h)">ค้นหาเส้นทาง</button>
+      <!-- <h3>Don't Know What To Do!</h3>
+      <p>I've had a pretty messed up day. If we just...</p> -->
+      <p>
+        <button ion-button color="secondary">
+          <ion-icon name="call"> </ion-icon> โทรหาคุณหมอ
+        </button>
+      </p>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>

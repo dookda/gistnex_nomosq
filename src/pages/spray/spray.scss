@@ -1,0 +1,51 @@
+page-spray {
+  @font-face {
+    font-family: 'Kanit';
+    src: url('../assets/fonts/Kanit-Regular.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Kanit-Bold';
+    src: url('../assets/fonts/Kanit-Bold.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Kanit-Light';
+    src: url('../assets/fonts/Kanit-Light.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  background-color: #387ef5;
+
+  .kanit {
+    font-family: 'Kanit';
+  }
+
+  .kanit-bold {
+    font-family: 'Kanit-Bold';
+  }
+
+  .kanit-light {
+    font-family: 'Kanit-Light';
+  }
+
+  .map {
+    //width:100%; 
+    height: 70%;
+  }
+
+  .data {
+    height: 25%;
+  }
+
+  .bg {
+    background-image: url("http://www.stuermerfoto.ch/render/w1024-q90/examples/assets/city-lights.jpg");
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+  }
+}
