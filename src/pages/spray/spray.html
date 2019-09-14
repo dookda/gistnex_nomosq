@@ -9,18 +9,23 @@
   <div class="map" id="map2"></div>
 
   <div padding>
-    <h4>กรอกข้อมูลการฉีดพ่นสารเคมี</h4>
+
+    <button ion-button round outline item-end (click)="startTracking()">เริ่ม tracking</button>
+    <button ion-button round outline item-end (click)="stopTracking()">หยุด tracking</button>
+
+
+    <h4>รายงานการฉีดพ่นสารเคมี</h4>
     <p></p>
 
     <!-- Input with placeholder -->
+    <ion-label>ชื่อสถานที่</ion-label>
     <ion-input placeholder="ชื่อสถานที่" [(ngModel)]="description" disabled={{validInput}}>
     </ion-input>
     <!-- Input with placeholder -->
+    <ion-label>ผู้รายงาน</ion-label>
     <ion-input placeholder="ผู้รายงาน" [(ngModel)]="reporter" disabled={{validInput}}></ion-input>
-
+    <p></p>
+    <button ion-button round outline item-end (click)="addData()">ส่งข้อมูล</button>
   </div>
-
-  <button ion-button clear item-end (click)="addData()">เพิ่มข้อมูลฉีดพ่น</button>
-
 
 </ion-content>

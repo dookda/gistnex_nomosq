@@ -129,52 +129,57 @@ export class ViewlocatePage {
 
     // .addTo(this.map)
 
-    const loc = [[16.639315, 100.149436],
-    [16.650731, 100.151818],
-    [16.665962, 100.158677],
-    [16.685371, 100.162800],
-    [16.702148, 100.168985],
-    [16.713334, 100.174139],
-    [16.725835, 100.178264],
-    [16.736364, 100.178953],
-    [16.746892, 100.184109],
-    [16.754789, 100.188235],
-    [16.763015, 100.193048],
-    [16.769641, 100.198361],
-    [16.784333, 100.201937],
-    [16.791566, 100.208463],
-    [16.799128, 100.214302],
-    [16.806032, 100.220486],
-    [16.811949, 100.228731]
-    ];
+    // const loc = [[16.639315, 100.149436],
+    // [16.650731, 100.151818],
+    // [16.665962, 100.158677],
+    // [16.685371, 100.162800],
+    // [16.702148, 100.168985],
+    // [16.713334, 100.174139],
+    // [16.725835, 100.178264],
+    // [16.736364, 100.178953],
+    // [16.746892, 100.184109],
+    // [16.754789, 100.188235],
+    // [16.763015, 100.193048],
+    // [16.769641, 100.198361],
+    // [16.784333, 100.201937],
+    // [16.791566, 100.208463],
+    // [16.799128, 100.214302],
+    // [16.806032, 100.220486],
+    // [16.811949, 100.228731]
+    // ];
 
-    let i = 0;
+    // let i = 0;
 
     // setInterval(() => {
-    const res = {
-      coords: {
-        latitude: loc[8][0],
-        longitude: loc[8][1]
-      }
-    }
+    // const res = {
+    //   coords: {
+    //     latitude: loc[8][0],
+    //     longitude: loc[8][1]
+    //   }
+    // }
 
-    console.log(res)
+    // console.log(res)
 
-    this.getDengue(res.coords.latitude, res.coords.longitude, 1000);
-    this.getLocation(res);
-    i += 1
+    // this.service.calLocation().subscribe((res: any) => {
+    //   this.getDengue(res.coords.latitude, res.coords.longitude, 1000);
+    //   this.getLocation(res);
+    // })
+
+    // i += 1
     // }, 3000)
 
     // getLocation
+    // this.geolocation.watchPosition().subscribe((res: any) => {
+    //   this.getDengue(res.coords.latitude, res.coords.longitude, 1000);
+    //   this.service.setLocation(res);
+    // });
 
-  }
+    this.service.calLocation().subscribe((res: any) => {
+      console.log(res);
+      this.getDengue(res.coords.latitude, res.coords.longitude, 1000);
+      this.service.setLocation(res);
+    })
 
-
-  getLocation(res: any) {
-    // this.geolocation.watchPosition().subscribe((res1: any) => {
-    // let latlng = [res.coords.latitude, res.coords.longitude];
-    this.service.setLocation(res);
-    // })
   }
 
   async getDengue(lat: any, lon: any, buff: any) {
@@ -190,7 +195,7 @@ export class ViewlocatePage {
       this.dengueLst = res.features;
       this.dengueSum = this.dengueLst.length;
       const latlng = [lat, lon]
-      console.log(latlng);
+      // console.log(latlng);
       if (this.dengueSum > 0) {
         this.markerIcon = this.markerService.redIcon;
       } else {

@@ -32,11 +32,12 @@ export class HospitalPage {
   ) {
   }
 
-  ionViewDidLoad() {
-    this.loadMap();
+  async ionViewDidLoad() {
+    await this.loadMap();
+    await this.getLocation();
   }
 
-  loadMap() {
+  async loadMap() {
     this.map3 = L.map('map3', { zoomControl: false }).setView([16.7421394, 100.19199189999999], 13);
 
     var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -103,7 +104,7 @@ export class HospitalPage {
     // .addTo(this.map3)
 
     // getLocation
-    this.getLocation();
+
 
     this.r = L.Routing.control({
       // waypoints: [
@@ -115,31 +116,33 @@ export class HospitalPage {
   }
 
   getLocation() {
-    this.service.getLocation().then((res: any) => {
-      this.map3.eachLayer((lyr: any) => {
-        if (lyr.options.iconName == 'current' || lyr.options.iconName == 'hospital') {
-          this.map3.removeLayer(lyr);
-        }
-      });
+    // this.service.calLocation().subscribe((res: any) => {
+    let res = this.service.getLocation();
+    console.log(res);
+    this.map3.eachLayer((lyr: any) => {
+      if (lyr.options.iconName == 'current' || lyr.options.iconName == 'hospital') {
+        this.map3.removeLayer(lyr);
+      }
+    });
 
-      const greenIcon = this.markerService.greenIcon;
-      const icon = L.icon({
-        iconUrl: greenIcon,
-        iconSize: [32, 37],
-        iconAnchor: [12, 37],
-        popupAnchor: [5, -30]
-      });
+    const greenIcon = this.markerService.greenIcon;
+    const icon = L.icon({
+      iconUrl: greenIcon,
+      iconSize: [32, 37],
+      iconAnchor: [12, 37],
+      popupAnchor: [5, -30]
+    });
 
-      this.latlon = [res.coords.latitude, res.coords.longitude];
-      this.marker = L.marker(this.latlon, {
-        icon: icon,
-        iconName: 'current'
-      }).addTo(this.map3);
+    this.latlon = [res.coords.latitude, res.coords.longitude];
+    this.marker = L.marker(this.latlon, {
+      icon: icon,
+      iconName: 'current'
+    }).addTo(this.map3);
 
-      this.map3.setView(this.latlon, 13);
+    this.map3.setView(this.latlon, 13);
 
-      this.getHospital(this.latlon[0], this.latlon[1], this.radius)
-    })
+    this.getHospital(this.latlon[0], this.latlon[1], this.radius)
+    // })
   }
 
   async getHospital(lat: any, lon: any, buff: any) {

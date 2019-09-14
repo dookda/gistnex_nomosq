@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ServiceProvider {
@@ -40,15 +41,27 @@ export class ServiceProvider {
   }
 
   getLocation() {
-    return new Promise((res, rej) => {
-      res(this.location);
-    })
+    return this.location;
   }
 
-  addCircle(obj: any) {
+  calLocation(): Observable<any> {
+    let watch = this.geolocation.watchPosition();
+    // console.log(watch);
+    watch.filter((p) => p.coords !== undefined).subscribe((res: any) => {
+      this.location = res;
+      console.log(res);
+    })
+
+    return watch;
+
+
+  }
+
+  insertFeature(obj: any) {
     return new Promise((res, rej) => {
       const url = `http://cgi.uru.ac.th:3000/api/addcircle`;
       this.http.post(url, obj).subscribe((data: any) => {
+        this.setLocation(res);
         res(data);
       }, (err) => {
         rej(err);
