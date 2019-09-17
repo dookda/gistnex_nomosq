@@ -3,7 +3,7 @@ import { ServiceProvider } from './../../providers/service/service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as L from 'leaflet';
-import 'leaflet-routing-machine';
+import { RoutingPage } from '../routing/routing';
 
 @IonicPage()
 @Component({
@@ -52,11 +52,11 @@ export class HospitalPage {
 
     var theos_wmts = L.tileLayer(
       'http://go-tiles1.gistda.or.th/mapproxy/wmts/thaichote/GLOBAL_WEBMERCATOR/{z}/{x}/{y}.png', {
-        minZoom: 0,
-        maxZoom: 20,
-        format: 'image/png',
-        attribution: '&copy; <a href = "http://www.gistda.or.th">GISTDA</a>',
-      })
+      minZoom: 0,
+      maxZoom: 20,
+      format: 'image/png',
+      attribution: '&copy; <a href = "http://www.gistda.or.th">GISTDA</a>',
+    })
 
     var googlemap = L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
       maxZoom: 20,
@@ -97,28 +97,17 @@ export class HospitalPage {
       "Thaichote": theos_wmts,
       "Google Hybrid": satellite
     }, {
-        'ขอบเขตจังหวัด': pro.addTo(this.map3),
-        'ขอบเขตอำเภอ': amp.addTo(this.map3),
-        'ขอบเขตตำบล': tam.addTo(this.map3),
-      });
-    // .addTo(this.map3)
-
-    // getLocation
-
-
-    this.r = L.Routing.control({
-      // waypoints: [
-      //   L.latLng(this.lat, this.lng),
-      //   L.latLng(this.lat_place, this.lon_place)
-      // ]
-    }).addTo(this.map3);
-
+      'ขอบเขตจังหวัด': pro.addTo(this.map3),
+      'ขอบเขตอำเภอ': amp.addTo(this.map3),
+      'ขอบเขตตำบล': tam.addTo(this.map3),
+    });
+    // .addTo(this.map3) 
   }
 
   getLocation() {
     // this.service.calLocation().subscribe((res: any) => {
     let res = this.service.getLocation();
-    console.log(res);
+    // console.log(res);
     this.map3.eachLayer((lyr: any) => {
       if (lyr.options.iconName == 'current' || lyr.options.iconName == 'hospital') {
         this.map3.removeLayer(lyr);
@@ -189,7 +178,6 @@ export class HospitalPage {
       let icon;
       let marker = L.geoJSON(res, {
         pointToLayer: function (feature, latlon) {
-
           if (feature.properties.typecode == 5 || feature.properties.typecode == 4 || feature.properties.typecode == 7 || feature.properties.typecode == 62) {
             icon = iconredHospital;
           } else if (feature.properties.typecode == 3) {
@@ -219,17 +207,24 @@ export class HospitalPage {
     })
   }
 
-  selectDistance(e) {
+  selectDistance(e: any) {
     // console.log(this.radius);
     this.getLocation();
   }
 
-  selectHospital(e: any) {
-    // console.log(e)
-    this.r.setWaypoints([
-      L.latLng(this.latlon[0], this.latlon[1]),
-      L.latLng(e.properties.lat, e.properties.lon)
-    ]);
+  gotoRoute(e: any) {
+    // console.log(e.properties.lat, e.properties.lon);
+    const latlon = {
+      start: {
+        lat: this.latlon[0],
+        lng: this.latlon[1]
+      },
+      end: {
+        lat: e.properties.lat,
+        lng: e.properties.lon
+      }
+    }
+    this.navCtrl.push(RoutingPage, { latlon: latlon });
   }
 
 }

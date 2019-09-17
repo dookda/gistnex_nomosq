@@ -1,14 +1,14 @@
 <ion-header class="kanit">
   <ion-navbar color="darkblue">
-    <img alt="logo" height="40" src="../../assets/imgs/logo.png">
-    <!-- <ion-title>Hospital-ค้นหาโรงพยาบาล</ion-title> -->
+    <!-- <img alt="logo" height="40" src="../../assets/imgs/logo.png"> -->
+    <ion-title>ค้นหาโรงพยาบาล</ion-title>
+    <!-- <ion-title>NOMOSQ</ion-title> -->
   </ion-navbar>
 </ion-header>
 
 
 <ion-content class="kanit">
   <div class="map" id="map3"></div>
-
   <ion-item>
     <ion-label>เลือกระยะห่าง</ion-label>
     <ion-select [(ngModel)]="radius" interface="popover" (ionChange)="selectDistance($event)">
@@ -24,7 +24,8 @@
     </div>
     <ion-item *ngFor="let h of hospitalLst; let a = index">
       <h2>{{h.properties.name}}</h2>
-      <button ion-button clear item-end (click)="selectHospital(h)">ค้นหาเส้นทาง</button>
+      <!-- <button ion-button clear item-end (click)="selectHospital(h)">ค้นหาเส้นทาง</button> -->
+      <button ion-button clear item-end (click)="gotoRoute(h)">ค้นหาเส้นทาง</button>
       <!-- <h3>Don't Know What To Do!</h3>
       <p>I've had a pretty messed up day. If we just...</p> -->
       <p>
@@ -34,6 +35,5 @@
       </p>
     </ion-item>
   </ion-list>
-
 
 </ion-content>

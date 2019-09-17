@@ -29,7 +29,6 @@ export class DetailPage {
     console.log(this.id);
   }
 
-
   ionViewDidLoad() {
     this.getData();
   }
@@ -41,7 +40,6 @@ export class DetailPage {
       // console.log(this.faq);
     });
   }
-
 
 }
 
