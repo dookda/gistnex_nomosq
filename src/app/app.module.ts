@@ -18,6 +18,10 @@ import { SprayPageModule } from '../pages/spray/spray.module';
 import { HospitalPageModule } from '../pages/hospital/hospital.module';
 import { FormsModule } from '@angular/forms';
 import { MarkerProvider } from '../providers/marker/marker';
+import { DetailPageModule } from '../pages/detail/detail.module';
+import { DetailPage } from '../pages/detail/detail';
+
+
 
 @NgModule({
   declarations: [
@@ -25,7 +29,8 @@ import { MarkerProvider } from '../providers/marker/marker';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    DetailPage
   ],
   imports: [
     FormsModule,
@@ -42,7 +47,8 @@ import { MarkerProvider } from '../providers/marker/marker';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    DetailPage
   ],
   providers: [
     StatusBar,

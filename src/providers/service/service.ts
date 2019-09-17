@@ -51,10 +51,7 @@ export class ServiceProvider {
       this.location = res;
       console.log(res);
     })
-
     return watch;
-
-
   }
 
   insertFeature(obj: any) {
@@ -78,6 +75,16 @@ export class ServiceProvider {
         rej(err);
       })
     });
+  }
+
+  getFAQs() {
+    const url = `http://cgi.uru.ac.th:3000/api/faq/`;
+    return this.http.get(url);
+  }
+
+  getFAQ(id: number) {
+    const url = `http://cgi.uru.ac.th:3000/api/faq/` + id;
+    return this.http.get(url);
   }
 
 }
